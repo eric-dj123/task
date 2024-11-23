@@ -40,13 +40,14 @@
 
         /* Navbar */
         nav {
-            display: flex;
+            display: flex; /* Menu izaba ifite uburyo bwa flex ku bikoresho binini */
+            flex-direction: row; /* Ishyira links mu murongo umwe kuri desktop */
             gap: 15px;
         }
 
         nav a {
             color: #fff;
-             text-decoration: none;
+            text-decoration: none;
             font-size: 1.1rem;
             padding: 0.5rem 1rem;
             border-radius: 5px;
@@ -58,6 +59,22 @@
             color: #fff;
         }
 
+        /* Hamburger Menu Button (Hidden by default) */
+        .nav-toggle {
+            display: none; /* Ikibanza cya hamburger menu kihishe by default */
+            background-color: #2a0487;
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            padding: 0.5rem;
+            cursor: pointer;
+            margin-left: auto;
+        }
+
+        .nav-toggle:focus {
+            outline: none;
+        }
+
         /* Hero Section */
         .hero {
             margin-top: 80px;
@@ -66,7 +83,7 @@
             padding: 4rem 2rem;
             text-align: center;
         }
- 
+
         .hero h2 {
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
@@ -163,23 +180,32 @@
             margin-top: 2rem;
         }
 
-        /* Responsive */
+        /* Responsive Menu: Media Query */
         @media (max-width: 768px) {
+            .nav-toggle {
+                display: block; /* Ikimenyetso cya hamburger kigaragara kuri telefoni */
+            }
+
             nav {
-                flex-wrap: wrap;
-                gap: 10px;
+                display: none; /* Menu izihishwa by default */
+                flex-direction: column; /* Menu ihinduka vertical */
+                gap: 0;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                background-color: #2a0487;
+                width: 100%;
+                z-index: 1000;
             }
 
-            .hero h2 {
-                font-size: 2rem;
+            nav.active {
+                display: flex; /* Menu yagaragazwa n'ikimenyetso cya hamburger */
             }
 
-            .hero p {
-                font-size: 1rem;
-            }
-
-            header h1 {
-                font-size: 1.5rem;
+            nav a {
+                padding: 1rem;
+                text-align: center;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             }
         }
     </style>
@@ -189,6 +215,8 @@
     <!-- Header Section -->
     <header>
         <h1>E-Commerce Store</h1>
+        <!-- Hamburger Button -->
+        <button class="nav-toggle">&#9776;</button>
         <nav>
             <a href="#">Home</a>
             <a href="#">Products</a>
@@ -210,7 +238,6 @@
     <section class="products">
         <h2>Our Products</h2>
         <div class="product-grid">
-            <!-- Product Card -->
             <div class="product-card">
                 <img src="shoes1.jpeg" alt="Shoes">
                 <div class="product-card-content">
@@ -227,22 +254,6 @@
                     <button>Add to Cart</button>
                 </div>
             </div>
-            <div class="product-card">
-                <img src="shoes1.jpeg" alt="Sandals">
-                <div class="product-card-content">
-                    <h3>Summer Sandals</h3>
-                    <p class="price">$29.99</p>
-                    <button>Add to Cart</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="shoes4.jpeg" alt="Boots">
-                <div class="product-card-content">
-                    <h3>Winter Boots</h3>
-                    <p class="price">$89.99</p>
-                    <button>Add to Cart</button>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -251,5 +262,14 @@
         <p>&copy; 2024 E-Commerce Store. All rights reserved.</p>
     </footer>
 
+    <script>
+        // JavaScript for Hamburger Menu
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('nav');
+
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
